@@ -26,7 +26,7 @@ class UserFactory extends Factory
         return [
             'name' => $this->faker->name(),
             'email' => $this->faker->unique()->safeEmail(),
-            'password' => static::$password ??= Hash::make('password'), // Set default password 'password'
+            'password' => static::$password ??= Hash::make('CodeX'), // Set default password 'password'
             'created_at' => now(),
             'updated_at' => now(),
         ];

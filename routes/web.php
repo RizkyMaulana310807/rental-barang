@@ -4,6 +4,7 @@ use App\Models\Barang;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GambarController;
 use App\Http\Controllers\BarangController;
+use App\Http\Controllers\AuthController;
 
 
 Route::get('/', function () {
@@ -20,3 +21,6 @@ Route::get('/barang/create', [BarangController::class, 'create'])->name('barang.
 Route::post('/barang/store', [BarangController::class, 'store'])->name('barang.store');
 
 Route::delete('/barang/{id}', [BarangController::class, 'destroy'])->name('barang.destroy');
+
+Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register.form');
+Route::post('/register', [AuthController::class, 'register'])->name('register');

@@ -1,6 +1,10 @@
 <x-layout>
     <x-slot:title>testing</x-slot:title>
-    <a href="/barang/create">Tambah barang
+    @if (auth()->check() && auth()->user()->role === 'admin')
+        <p>Selamat datang, Admin!</p>
+        <a href="/barang/create">Tambah barang
+    @endif
+
     </a>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         @foreach ($stocks as $stock)
