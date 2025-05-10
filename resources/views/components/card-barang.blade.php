@@ -18,7 +18,7 @@
     <!-- Modal Detail -->
     <div x-show="openDetail" @click.away="openDetail = false" x-transition
         class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-        <div class="bg-white rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+        <div class="bg-white rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto" @click.stop>
             <div class="p-6 space-y-6">
                 <div class="flex justify-between items-start">
                     <h3 class="text-2xl font-bold text-gray-800">Detail Barang</h3>
@@ -74,15 +74,17 @@
                         Pinjam
                     </button>
                 </div>
-                <div>
-                    <form action="{{ route('barang.destroy', $id) }}" method="POST"
-                        onsubmit="return confirm('Yakin ingin menghapus barang ini?')">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="bg-red-500 text-white px-3 py-1 rounded">Hapus</button>
-                    </form>
 
-                </div>
+                @if (auth()->check() && trim(auth()->user()->role) == 'admin')
+                    <div>
+                        <form action="{{ route('barang.destroy', $id) }}" method="POST"
+                            onsubmit="return confirm('Yakin ingin menghapus barang ini?')">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="bg-red-500 text-white px-3 py-1 rounded">Hapus</button>
+                        </form>
+                    </div>
+                @endif
             </div>
         </div>
     </div>

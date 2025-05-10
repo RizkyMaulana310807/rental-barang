@@ -1,14 +1,15 @@
 <x-layout>
-    <x-slot:title>testing</x-slot:title>
-    @if (auth()->check() && auth()->user()->role === 'admin')
-        <p>Selamat datang, Admin!</p>
-        <a href="/barang/create">Tambah barang
-    @endif
+    <x-slot:title>Home</x-slot:title>
 
-    </a>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        @foreach ($stocks as $stock)
-            <x-card-barang :id="$stock->id" :name="$stock->nama" :description="$stock->deskripsi" :stock="$stock->stock" :imageUrl="asset('storage/' . $stock->img_path)" />
-        @endforeach
+        {{-- @dd(count($stocks)) --}}
+        @if (count($stocks) > 0)
+            @foreach ($stocks as $stock)
+                <x-card-barang :id="$stock->id" :name="$stock->nama" :description="$stock->deskripsi" :stock="$stock->stock"
+                    :imageUrl="asset('storage/' . $stock->img_path)" />
+            @endforeach
+        @else
+            <p class="text-sm text-gray-700">Tidak ada item yang tersedia</p>
+        @endif
     </div>
 </x-layout>

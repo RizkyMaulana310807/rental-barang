@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GambarController;
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\AuthController;
-
+use App\Http\Controllers\DashboardController;
 
 Route::get('/', function () {
     $stocks = Barang::all(); // Ambil semua data dari tabel 'barang'
@@ -24,3 +24,10 @@ Route::delete('/barang/{id}', [BarangController::class, 'destroy'])->name('baran
 
 Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register.form');
 Route::post('/register', [AuthController::class, 'register'])->name('register');
+
+Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login.form');
+Route::post('/login', [AuthController::class, 'login'])->name('login');
+
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+Route::get('/Dashboard', [DashboardController::class, 'showDashboard'])->name('dashboard');
