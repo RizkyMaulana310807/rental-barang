@@ -31,3 +31,6 @@ Route::post('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::get('/Dashboard', [DashboardController::class, 'showDashboard'])->name('dashboard');
+Route::get('/Dashboard', [DashboardController::class, 'showBarang'])->name('barang');
+Route::get('/Dashboard', [DashboardController::class, 'showUser'])->name('user');
+Route::get('/Dashboard', [DashboardController::class, 'showTransaksi'])->name('transaksi');

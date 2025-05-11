@@ -13,4 +13,25 @@ class DashboardController extends Controller
             return view('dashboard');
         }
     }
+
+    public function showBarang()
+    {
+        if (Auth::check() && trim(Auth::user()->role) == 'admin') {
+            return view('admin.barang');
+        }
+    }
+
+    public function showUser()
+    {
+        if (Auth::check() && trim(Auth::user()->role) == 'admin') {
+            return view('admin.user');
+        }
+    }
+
+    public function showTransaksi()
+    {
+        if (Auth::check() && trim(Auth::user()->role) == 'admin') {
+            return view('admin.transaksi');
+        }
+    }
 }

@@ -1,75 +1,50 @@
 <div x-data="{ open: true }" class="flex">
     <!-- Sidebar -->
-    <div :class="open ? 'w-64' : 'w-20'" class="bg-white h-screen shadow-md transition-all duration-300 flex flex-col justify-between">
+    <div :class="open ? 'w-64' : 'w-20'"
+        class="bg-white h-screen shadow-md transition-all duration-300 flex flex-col justify-between">
 
         <!-- Top Section -->
         <div>
             <!-- Toggle Button -->
             <div class="flex items-center justify-between p-4 border-b">
                 <div class="flex items-center space-x-2">
-                    <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" stroke-width="2"
-                         viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10
-                                10-4.48 10-10S17.52 2 12 2z" />
-                    </svg>
-                    <span x-show="open" class="text-lg font-semibold">Flup</span>
+                    <img class="h-8 w-auto" src="{{ asset('images/logosmkrembg.png') }}" alt="Logo">
+                    <span x-show="open" class="text-lg font-semibold text-gray-700">Dashboard</span>
                 </div>
                 <button @click="open = !open">
-                    <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" stroke-width="2"
-                         viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
-                        <path x-show="open" d="M15 19l-7-7 7-7" />
-                        <path x-show="!open" d="M9 5l7 7-7 7" />
-                    </svg>
+                    <i class="fas fa-chevron-right"></i>
                 </button>
             </div>
 
             <!-- Menu -->
             <nav class="p-4 space-y-4">
                 <div>
-                    <p x-show="open" class="text-gray-500 text-xs uppercase mb-2">Marketing</p>
+                    <p x-show="open" class="text-gray-500 text-xs uppercase mb-2">Management <i
+                            class="fas fa-tools"></i></p>
                     <ul class="space-y-2">
                         <li><a href="#" class="flex items-center space-x-3 text-gray-700 hover:text-green-600">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2"
-                                     viewBox="0 0 24 24">
-                                    <path d="M3 12h18M3 6h18M3 18h18" />
-                                </svg>
-                                <span x-show="open">Dashboard</span>
+                                <i class="fas fa-boxes" title="Barang"></i>
+                                <span x-show="open">Barang</span>
                             </a></li>
                         <li><a href="#" class="flex items-center space-x-3 text-gray-700 hover:text-green-600">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2"
-                                     viewBox="0 0 24 24">
-                                    <path d="M3 3h18v18H3z" />
-                                </svg>
-                                <span x-show="open">Marketplace</span>
+                                <i class="fas fa-users" title="User"></i>
+                                <span x-show="open">User</span>
                             </a></li>
-                        <!-- Tambahkan menu lainnya di sini -->
+                        <li><a href="#" class="flex items-center space-x-3 text-gray-700 hover:text-green-600">
+                                <i class="fa fa-file-alt" title="Transaksi"></i>
+                                <span x-show="open">Transaksi</span>
+                            </a></li>
                     </ul>
                 </div>
 
                 <div>
-                    <p x-show="open" class="text-gray-500 text-xs uppercase mb-2">System</p>
+                    <p x-show="open" class="text-gray-500 text-xs uppercase mb-2">System <i
+                            class="fas fa-gear fa-spin"></i></p>
                     <ul class="space-y-2">
                         <li><a href="#" class="flex items-center space-x-3 text-gray-700 hover:text-green-600">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2"
-                                     viewBox="0 0 24 24">
-                                    <path d="M12 6v6l4 2" />
-                                </svg>
+                                <i class="fas fa-gear" title="Settings"></i>
                                 <span x-show="open">Settings</span>
                             </a></li>
-                        <li class="flex items-center justify-between">
-                            <div class="flex items-center space-x-3 text-gray-700">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2"
-                                     viewBox="0 0 24 24">
-                                    <path d="M12 3v18m9-9H3" />
-                                </svg>
-                                <span x-show="open">Dark mode</span>
-                            </div>
-                            <label x-show="open" class="inline-flex items-center cursor-pointer">
-                                <input type="checkbox" class="sr-only">
-                                <div class="w-10 h-4 bg-gray-200 rounded-full shadow-inner"></div>
-                                <div class="dot absolute w-6 h-6 bg-white rounded-full shadow -left-1 -top-1 transition"></div>
-                            </label>
-                        </li>
                     </ul>
                 </div>
             </nav>
@@ -78,16 +53,20 @@
         <!-- Bottom Section -->
         <div class="p-4 border-t">
             <div class="flex items-center space-x-3">
-                <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Avatar"
-                     class="w-8 h-8 rounded-full">
+                <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Avatar" class="w-8 h-8 rounded-full">
                 <div x-show="open">
-                    <p class="text-sm font-semibold">Harper Nelson</p>
-                    <p class="text-xs text-gray-500">Admin Manager</p>
+                    <p class="text-sm font-semibold">{{ auth()->user()->name }}</p>
+                    <p class="text-xs text-gray-500"> <i class="fas fa-clipboard-user"></i> {{ auth()->user()->role }}
+                    </p>
                 </div>
             </div>
-            <div class="mt-2" x-show="open">
-                <button class="text-red-500 text-sm hover:underline">Log out</button>
-            </div>
+            <form action="{{ route('logout') }}" method="POST">
+                @csrf
+                <button type="submit" class="block w-full text-left px-4 py-2 text-sm text-red-700 hover:bg-red-100">
+                    <i class="fas fa-door-open"></i> Logout
+                </button>
+            </form>
+
         </div>
     </div>
 
