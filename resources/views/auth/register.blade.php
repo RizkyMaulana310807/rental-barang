@@ -87,14 +87,15 @@
                     </div>
 
                     <div class="flex items-center space-x-2 text-sm">
-                        <input type="checkbox" class="form-checkbox text-purple-600 rounded">
-                        <span>Saya setuju dengan <a href="#" class="text-purple-600 hover:underline">syarat &
-                                ketentuan</a></span>
+                        <input id="sdk" name="sdk" type="checkbox"
+                            class="form-checkbox text-purple-600 rounded">
+                        <label class="text-gray-700" for="sdk">Saya setuju dengan <a href="#"
+                                class="text-purple-600 hover:underline">syarat &
+                                ketentuan</a></label>
                     </div>
 
                     <button type="submit"
-                        class="w-full bg-purple-600 text-white py-2 rounded-lg hover:bg-purple-700 transition">Buat
-                        Akun</button>
+                        class="w-full bg-purple-600 text-white py-2 rounded-lg hover:bg-white hover:border-purple-700 hover:text-purple-700 border-2 border-transparent font-bold transition-all duration-200 ease-in-out">Buat Akun</button>
                 </form>
 
                 <p class="text-sm text-center mt-6 text-gray-600">Sudah punya akun? <a href="/login"

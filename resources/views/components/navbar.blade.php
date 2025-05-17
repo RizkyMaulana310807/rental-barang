@@ -3,11 +3,10 @@
         <div class="flex justify-between h-16">
             <!-- Logo -->
             <div class="flex-shrink-0 flex items-center">
-                @if (!Route::is('dashboard'))
-                <a href="/">
-                    <img class="h-8 w-auto" src="{{ asset('images/logosmkrembg.png') }}" alt="Logo">
-                </a>
-
+                @if (!Route::is(['dashboard', 'user', 'barang', 'transaksi']))
+                    <a href="/">
+                        <img class="h-8 w-auto" src="{{ asset('images/logosmkrembg.png') }}" alt="Logo">
+                    </a>
                 @endif
             </div>
 
@@ -29,7 +28,7 @@
                                 href="/Profile">Profile</a>
 
                             @if (trim(auth()->user()->role) == 'admin')
-                                @if (Route::is('dashboard'))
+                                @if (Route::is(['dashboard', 'user', 'barang', 'transaksi']))
                                     <a href="/"
                                         class="block w-full px-4 py-2 text-sm text-blue-700 hover:text-blue-900 hover:bg-blue-50">
                                         Home
@@ -85,7 +84,7 @@
                     Profile
                 </a>
                 @if (trim(auth()->user()->role) == 'admin')
-                    @if (Route::is('dashboard'))
+                    @if (Route::is(['dashboard', 'user', 'barang', 'transaksi']))
                         <a href="/"
                             class="block w-full px-3 py-2 text-base font-medium text-blue-700 hover:text-blue-900 hover:bg-blue-50">
                             Home

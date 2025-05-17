@@ -31,6 +31,7 @@ Route::post('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::get('/Dashboard', [DashboardController::class, 'showDashboard'])->name('dashboard');
-Route::get('/Dashboard', [DashboardController::class, 'showBarang'])->name('barang');
-Route::get('/Dashboard', [DashboardController::class, 'showUser'])->name('user');
-Route::get('/Dashboard', [DashboardController::class, 'showTransaksi'])->name('transaksi');
+Route::get('/Dashboard/barang', [DashboardController::class, 'showBarang'])->name('barang');
+Route::get('/Dashboard/user', [DashboardController::class, 'showUser'])->name('user');
+Route::get('/Dashboard/transaksi', [DashboardController::class, 'showTransaksi'])->name('transaksi');
+Route::get('/Dashboard/{id}/edit', [DashboardController::class, 'editUser'])->name('editUser');

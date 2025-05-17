@@ -45,6 +45,13 @@
                         </div>
                     </div>
 
+                    <div class="flex items-center space-x-2 text-sm">
+                        <input type="checkbox" class="form-checkbox text-purple-600 rounded" name="remember"
+                            id="remember">
+                        <label class="text-gray-700" for="remember">Ingat saya</label>
+                    </div>
+
+
                     <!-- Submit -->
                     <button type="submit"
                         class="w-full bg-purple-600 text-white py-2 rounded-lg hover:bg-purple-700 transition">Login</button>

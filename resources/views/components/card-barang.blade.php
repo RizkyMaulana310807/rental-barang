@@ -77,12 +77,6 @@
 
                 @if (auth()->check() && trim(auth()->user()->role) == 'admin')
                     <div>
-                        <form action="{{ route('barang.destroy', $id) }}" method="POST"
-                            onsubmit="return confirm('Yakin ingin menghapus barang ini?')">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="bg-red-500 text-white px-3 py-1 rounded">Hapus</button>
-                        </form>
                     </div>
                 @endif
             </div>

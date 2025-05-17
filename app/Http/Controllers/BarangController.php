@@ -32,7 +32,7 @@ class BarangController extends Controller
         // Hapus data barang dari database
         $barang->delete();
 
-        return redirect()->route('home')->with('success', 'Barang dan gambar berhasil dihapus.');
+        return redirect()->route('barang')->with('success', 'Barang dan gambar berhasil dihapus.');
     }
 
     public function store(Request $request)

@@ -17,14 +17,16 @@ class DashboardController extends Controller
     public function showBarang()
     {
         if (Auth::check() && trim(Auth::user()->role) == 'admin') {
-            return view('admin.barang');
+            $barang = \App\Models\Barang::all();
+            return view('admin.barang', compact('barang'));
         }
     }
 
     public function showUser()
     {
         if (Auth::check() && trim(Auth::user()->role) == 'admin') {
-            return view('admin.user');
+            $user = \App\Models\User::all();
+            return view('admin.user', compact('user'));
         }
     }
 
@@ -34,4 +36,13 @@ class DashboardController extends Controller
             return view('admin.transaksi');
         }
     }
+
+    public function editUser()
+    {
+        if (Auth::check() && trim(Auth::user()->role) == 'admin') {
+            return view('barang.edit');
+        }
+    }
+
+    public function updateUser() {}
 }

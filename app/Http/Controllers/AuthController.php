@@ -18,34 +18,36 @@ class AuthController extends Controller
         return view('auth.login');
     }
 
-    public function register(Request $request) {
+    public function register(Request $request)
+    {
         $request->validate([
             'nama' => 'required',
             'username' => 'required',
             'kelas' => 'required',
-            'email' => 'required', 
+            'email' => 'required',
             'password' => 'required'
         ]);
 
         User::create([
             'name' => $request->nama,
-            // 'username' => $request->username,
-            // 'kelas' => $request->kelas,
+            'username' => $request->username,
             'email' => $request->email,
+            'class' => $request->kelas,
             'password' => $request->password,
         ]);
 
-        return redirect('/');
-        
+        return redirect('/login');
     }
 
-    public function login(Request $request){
+    public function login(Request $request)
+    {
         $request->validate([
             'email' => 'required',
             'password' => 'required'
         ]);
 
-        if(Auth::attempt($request->only('email', 'password'))){
+        if (Auth::attempt($request->only('email', 'password'), $request->has('remember'))) {
+            $request->session()->regenerate();
             return redirect('/');
         }
 
@@ -54,9 +56,9 @@ class AuthController extends Controller
         ])->withInput();
     }
 
-    public function logout(){
+    public function logout()
+    {
         Auth::logout();
         return redirect('/');
     }
-    
 }

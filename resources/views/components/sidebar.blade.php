@@ -8,10 +8,10 @@
             <!-- Toggle Button -->
             <div class="flex items-center justify-between p-4 border-b">
                 <div class="flex items-center space-x-2">
-                    <img class="h-8 w-auto" src="{{ asset('images/logosmkrembg.png') }}" alt="Logo">
+                    <img class="h-8 w-6 min-w-[2rem]" src="{{ asset('images/logosmkrembg.png') }}" alt="Logo">
                     <span x-show="open" class="text-lg font-semibold text-gray-700">Dashboard</span>
                 </div>
-                <button @click="open = !open">
+                <button @click="open = !open" class="px-2 py-2 hover:cursor-pointer">
                     <i class="fas fa-chevron-right"></i>
                 </button>
             </div>
@@ -22,15 +22,15 @@
                     <p x-show="open" class="text-gray-500 text-xs uppercase mb-2">Management <i
                             class="fas fa-tools"></i></p>
                     <ul class="space-y-2">
-                        <li><a href="#" class="flex items-center space-x-3 text-gray-700 hover:text-green-600">
+                        <li><a href="/Dashboard/barang" class="flex items-center space-x-3 text-gray-700 hover:text-green-600">
                                 <i class="fas fa-boxes" title="Barang"></i>
                                 <span x-show="open">Barang</span>
                             </a></li>
-                        <li><a href="#" class="flex items-center space-x-3 text-gray-700 hover:text-green-600">
+                        <li><a href="/Dashboard/user" class="flex items-center space-x-3 text-gray-700 hover:text-green-600">
                                 <i class="fas fa-users" title="User"></i>
                                 <span x-show="open">User</span>
                             </a></li>
-                        <li><a href="#" class="flex items-center space-x-3 text-gray-700 hover:text-green-600">
+                        <li><a href="/Dashboard/transaksi" class="flex items-center space-x-3 text-gray-700 hover:text-green-600">
                                 <i class="fa fa-file-alt" title="Transaksi"></i>
                                 <span x-show="open">Transaksi</span>
                             </a></li>
