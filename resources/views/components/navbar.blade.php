@@ -14,12 +14,18 @@
             <div class="hidden sm:ml-6 sm:flex sm:items-center relative">
                 @if (Auth::check())
                     <div class="relative">
-                        <i class="fas fa-clipboard-user" title="Admin authority"></i>
-                        <button onclick="toggleDropdown()" id="userButton"
-                            class="underline underline-offset-2 hover:underline-offset-4 hover:cursor-pointer transition-all duration-200 ease-in-out">
-                            {{ Auth::user()->name }}
-                        </button>
-
+                        @if (trim(Auth::user()->role) == 'admin')
+                            <i class="fas fa-clipboard-user" title="Admin authority"></i>
+                            <button onclick="toggleDropdown()" id="userButton"
+                                class="underline underline-offset-2 hover:underline-offset-4 hover:cursor-pointer transition-all duration-200 ease-in-out">
+                                {{ Auth::user()->name }}
+                            </button>
+                        @else
+                            <button onclick="toggleDropdown()" id="userButton"
+                                class="underline underline-offset-2 hover:underline-offset-4 hover:cursor-pointer transition-all duration-200 ease-in-out">
+                                {{ Auth::user()->name }}
+                            </button>
+                        @endif
                         <!-- Dropdown -->
                         <div id="userDropdown"
                             class="hidden absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-2 z-20">

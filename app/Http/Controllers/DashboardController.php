@@ -37,12 +37,4 @@ class DashboardController extends Controller
         }
     }
 
-    public function editUser()
-    {
-        if (Auth::check() && trim(Auth::user()->role) == 'admin') {
-            return view('barang.edit');
-        }
-    }
-
-    public function updateUser() {}
 }

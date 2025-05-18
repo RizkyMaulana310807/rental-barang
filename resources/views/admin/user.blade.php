@@ -44,7 +44,7 @@
                         class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b">
                         Update_at</th>
                     <th scope="col"
-                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b">
+                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b sticky right-0 z-10 bg-gray-50">
                         Aksi</th>
                 </tr>
             </thead>
@@ -62,13 +62,13 @@
                             <td class="px-6 py-4 whitespace-nowrap border-b">{{ $item->password }}</td>
                             <td class="px-6 py-4 whitespace-nowrap border-b">{{ $item->created_at }}</td>
                             <td class="px-6 py-4 whitespace-nowrap border-b">{{ $item->updated_at }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap border-b">
+                            <td class="px-6 py-4 whitespace-nowrap border-b bg-white sticky right-0 z-10">
                                 <div class="flex space-y-2 gap-4">
-                                    <button
+                                    <a href="{{ route('user.edit', ['id' => $item->id]) }}"
                                         class="bg-white hover:bg-blue-500 text-blue-500 hover:text-white border-2 border-blue-500 font-bold py-2 px-4 rounded hover:rounded-md flex items-center transition-all duration-200 ease-in-out">
                                         <i class="fas fa-pen-to-square mr-2"></i> Edit
-                                    </button>
-                                    <form action="{{ route('barang.destroy', $item->id) }}" method="POST"
+                                    </a>
+                                    <form action="{{ route('user.destroy', $item->id) }}" method="POST"
                                         onsubmit="return confirm('Yakin ingin menghapus barang ini?')">
                                         @csrf
                                         @method('DELETE')
