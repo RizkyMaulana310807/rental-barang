@@ -16,7 +16,7 @@
 
         <div class="flex h-screen">
             {{-- Sidebar tampil jika di dashboard --}}
-            @if (Route::is('dashboard') || Route::is('user') || Route::is('transaksi') || Route::is('barang'))
+            @if (Route::is('dashboard') || Route::is('user') || Route::is('transaksi') || Route::is('barang') || Route::is('kelas'))
                 <x-sidebar />
             @endif
 

@@ -22,6 +22,15 @@ class DashboardController extends Controller
         }
     }
 
+    public function showKelas()
+    {
+        if (Auth::check() && trim(Auth::user()->role) == 'admin') {
+            $kelas = \App\Models\Kelas::all();
+            return view('admin.kelas', compact('kelas'));
+        }
+    }
+
+
     public function showUser()
     {
         if (Auth::check() && trim(Auth::user()->role) == 'admin') {
@@ -36,5 +45,4 @@ class DashboardController extends Controller
             return view('admin.transaksi');
         }
     }
-
 }

@@ -7,6 +7,7 @@ use App\Http\Controllers\BarangController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\KelasController;
 
 Route::get('/', function () {
     $stocks = Barang::all(); // Ambil semua data dari tabel 'barang'
@@ -27,6 +28,10 @@ Route::post('/user/store', [UserController::class, 'store'])->name('user.store')
 Route::delete('/user/{id}', [UserController::class, 'destroy'])->name('user.destroy');
 Route::get('/user/{id}/edit', [UserController::class, 'edit'])->name('user.edit');
 
+Route::get('/kelas/create', [KelasController::class, 'create'])->name('kelas.create');
+Route::post('/kelas/store', [KelasController::class, 'store'])->name('kelas.store');
+Route::delete('/kelas/{id}', [KelasController::class, 'destroy'])->name('kelas.destroy');
+
 Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register.form');
 Route::post('/register', [AuthController::class, 'register'])->name('register');
 
@@ -39,4 +44,5 @@ Route::get('/Dashboard', [DashboardController::class, 'showDashboard'])->name('d
 Route::get('/Dashboard/barang', [DashboardController::class, 'showBarang'])->name('barang');
 Route::get('/Dashboard/user', [DashboardController::class, 'showUser'])->name('user');
 Route::get('/Dashboard/transaksi', [DashboardController::class, 'showTransaksi'])->name('transaksi');
+Route::get('/Dashboard/kelas', [DashboardController::class, 'showKelas'])->name('kelas');
 Route::get('/Dashboard/user/{id}/edit', [DashboardController::class, 'editUser'])->name('editUser');

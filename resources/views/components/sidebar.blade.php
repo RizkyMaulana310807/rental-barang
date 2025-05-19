@@ -22,15 +22,24 @@
                     <p x-show="open" class="text-gray-500 text-xs uppercase mb-2">Management <i
                             class="fas fa-tools"></i></p>
                     <ul class="space-y-2">
-                        <li><a href="/Dashboard/barang" class="flex items-center space-x-3 text-gray-700 hover:text-green-600">
+                        <li><a href="/Dashboard/barang"
+                                class="flex items-center space-x-3 text-gray-700 hover:text-green-600">
                                 <i class="fas fa-boxes" title="Barang"></i>
                                 <span x-show="open">Barang</span>
                             </a></li>
-                        <li><a href="/Dashboard/user" class="flex items-center space-x-3 text-gray-700 hover:text-green-600">
+                        <li><a href="/Dashboard/user"
+                                class="flex items-center space-x-3 text-gray-700 hover:text-green-600">
                                 <i class="fas fa-users" title="User"></i>
                                 <span x-show="open">User</span>
                             </a></li>
-                        <li><a href="/Dashboard/transaksi" class="flex items-center space-x-3 text-gray-700 hover:text-green-600">
+                        <li><a href="/Dashboard/kelas"
+                                class="flex items-center space-x-3 text-gray-700 hover:text-green-600">
+                                <i class="fa fa-users-between-lines" title="Kelas"></i>
+                                <span x-show="open">Kelas</span>
+                            </a></li>
+
+                        <li><a href="/Dashboard/transaksi"
+                                class="flex items-center space-x-3 text-gray-700 hover:text-green-600">
                                 <i class="fa fa-file-alt" title="Transaksi"></i>
                                 <span x-show="open">Transaksi</span>
                             </a></li>
