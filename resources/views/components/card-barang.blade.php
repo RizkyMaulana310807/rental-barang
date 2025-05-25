@@ -11,7 +11,7 @@
         <p class="text-gray-600 text-sm truncate">{{ $description }}</p>
         <div class="mt-2 flex justify-between text-sm text-gray-500">
             <span>Stok: {{ $stock }}</span>
-            <span>ID: {{ $id }}</span>
+            {{-- <span>ID: {{ $id }}</span> --}}
         </div>
     </div>
 
@@ -68,11 +68,10 @@
                 </div>
 
                 <div>
-                    <button
-                        class="w-full bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition-colors disabled:opacity-50"
-                        {{ $stock <= 0 ? 'disabled' : '' }}>
+                    <a href="{{ route('peminjaman.create', ['barang' => $id]) }}"
+                        class="w-full block text-center bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition-colors {{ $stock <= 0 ? 'pointer-events-none opacity-50' : '' }}">
                         Pinjam
-                    </button>
+                    </a>
                 </div>
 
                 @if (auth()->check() && trim(auth()->user()->role) == 'admin')
