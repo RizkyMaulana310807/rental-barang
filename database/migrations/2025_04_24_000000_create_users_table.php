@@ -15,13 +15,16 @@ return new class extends Migration
             $table->id();
             
             $table->string('name');
+            $table->string('username');
             $table->string('email')->unique();
-            $table->string('class');
+            $table->unsignedBigInteger('class_id')->nullable();
             $table->string('role')->default('user');
             $table->boolean('isGuru')->default(false);
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
+
+            $table->foreign('class_id')->references('id')->on('kelas')->onDelete('set null');
         });
     }
 

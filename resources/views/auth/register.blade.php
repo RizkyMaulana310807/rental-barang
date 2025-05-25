@@ -41,13 +41,10 @@
                                     class="text-red-500">*</span></label>
                             <select name="kelas"
                                 class="w-full mt-1 px-4 py-2 border rounded-lg focus:ring-2 focus:ring-purple-500 focus:outline-none">
-                                <option value="" disabled selected>Pilih Kelas</option>
-                                <option value="X RPL 1">X RPL 1</option>
-                                <option value="X RPL 2">X RPL 2</option>
-                                <option value="XI RPL 1">XI RPL 1</option>
-                                <option value="XI RPL 2">XI RPL 2</option>
-                                <option value="XII RPL 1">XII RPL 1</option>
-                                <option value="XII RPL 2">XII RPL 2</option>
+                                <option value="none" disabled selected>Pilih Kelas</option>
+                                @foreach ($kelas as $item)
+                                    <option value="{{ $item->id }}">{{ $item->nama_kelas }}</option>
+                                @endforeach
                                 <!-- Tambahkan opsi kelas lainnya sesuai kebutuhan -->
                             </select>
                         </div>
@@ -95,7 +92,8 @@
                     </div>
 
                     <button type="submit"
-                        class="w-full bg-purple-600 text-white py-2 rounded-lg hover:bg-white hover:border-purple-700 hover:text-purple-700 border-2 border-transparent font-bold transition-all duration-200 ease-in-out">Buat Akun</button>
+                        class="w-full bg-purple-600 text-white py-2 rounded-lg hover:bg-white hover:border-purple-700 hover:text-purple-700 border-2 border-transparent font-bold transition-all duration-200 ease-in-out">Buat
+                        Akun</button>
                 </form>
 
                 <p class="text-sm text-center mt-6 text-gray-600">Sudah punya akun? <a href="/login"

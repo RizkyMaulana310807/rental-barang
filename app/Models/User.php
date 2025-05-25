@@ -6,6 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Models\Kelas;
 
 class User extends Authenticatable
 {
@@ -19,7 +20,8 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
-        'class',
+        'username',
+        'class_id',
         'email',
         'password',
     ];
@@ -45,5 +47,9 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+    public function kelas()
+    {
+        return $this->belongsTo(Kelas::class, 'class_id');
     }
 }

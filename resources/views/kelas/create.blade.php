@@ -4,16 +4,26 @@
     <div class="container mx-auto px-4 py-8">
         <div class="flex justify-between items-center mb-8">
             <h2 class="text-2xl font-bold text-indigo-800">Tambah Data Kelas</h2>
-            <a href="/Dashboard/user"
+            <a href="/Dashboard/kelas"
                 class="text-indigo-600 bg-white w-12 h-12 flex justify-center items-center rounded-lg border-2 border-transparent hover:border-white hover:text-white hover:bg-indigo-500 transition duration-300 group">
                 <i class="fas fa-home fa-xl group-hover:fa-beat-fade text-current"></i>
             </a>
         </div>
 
         @if (session('success'))
-            <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-6">
+            <div id="toast" class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-6">
                 {{ session('success') }}
             </div>
+
+            <script>
+                setTimeout(() => {
+                    const toast = document.getElementById('toast')
+                    if(toast){
+                        toast.style.opacity = '0';
+                        setTimeout(() => toast.remove(), 500); // Hapus dari DOM setelah transisi
+                    }
+                }, 2000);
+            </script>
         @endif
 
         <div class="bg-white p-6 rounded-xl shadow-md">

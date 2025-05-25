@@ -4,13 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Kelas;
 use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
     public function showRegisterForm()
     {
-        return view('auth.register');
+        $kelas = Kelas::all();   
+        return view('auth.register', compact('kelas'));
     }
 
     public function showLoginForm()
@@ -23,8 +25,8 @@ class AuthController extends Controller
         $request->validate([
             'nama' => 'required',
             'username' => 'required',
-            'kelas' => 'required',
-            'email' => 'required',
+            'kelas' => 'exists:kelas,id',
+            'email' => 'required|email|unique:users,email',
             'password' => 'required'
         ]);
 
@@ -32,11 +34,11 @@ class AuthController extends Controller
             'name' => $request->nama,
             'username' => $request->username,
             'email' => $request->email,
-            'class' => $request->kelas,
+            'class_id' => $request->kelas,
             'password' => $request->password,
         ]);
 
-        return redirect('/login');
+        return redirect()->route('login')->with('succes', 'User berhasil di buat silahkan login untuk masuk');
     }
 
     public function login(Request $request)
@@ -51,9 +53,7 @@ class AuthController extends Controller
             return redirect('/');
         }
 
-        return back()->withErrors([
-            'email' => 'Email atau password salah',
-        ])->withInput();
+        return back()->with('error', 'Email atau password salah');
     }
 
     public function logout()

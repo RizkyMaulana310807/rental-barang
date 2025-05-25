@@ -26,7 +26,7 @@ class KelasController extends Controller
             'nama_kelas' => $Request->name,
         ]);
 
-        return view('home');
+        return redirect()->route('kelas.create')->with('success', "Kelas $Request->name berhasil di tambahkan.");
     }
 
     public function destroy($id)
@@ -36,10 +36,41 @@ class KelasController extends Controller
             $kelas = Kelas::findOrFail($id);
 
             $kelas->delete();
-            
-            return redirect()->route('barang')->with('success', 'Barang dan gambar berhasil dihapus.');
+
+            return redirect()->route('kelas')->with('success', "Kelas $kelas->nama_kelas berhasil dihapus.");
         } else {
             return view('home');
         }
     }
-}
+    public function edit($id)
+    {
+        $kelas = Kelas::find($id);
+
+        if ($kelas) {
+            return view('kelas.edit', compact('kelas'));
+        } else {
+            abort(404, 'Kelas tidak ditemukan');
+        }
+    }
+
+    public function update(Request $request, $id)
+    {
+        $kelas = Kelas::findOrFail($id);
+    
+        $request->validate([
+            'kelas' => 'required|string|max:255',
+        ]);
+    
+        // Cek apakah data yang dimasukkan sama dengan data sebelumnya
+        if ($kelas->nama_kelas === $request->kelas) {
+            return redirect()->route('kelas.edit', ['id' => $id])
+                ->withErrors(['error' => 'Tidak ada data yang diubah.']);
+        }
+    
+        $kelas->nama_kelas = $request->kelas;
+        $kelas->save();
+    
+        return redirect()->route('kelas.edit', ['id' => $id])
+            ->with('success', "Kelas {$request->kelas} berhasil diupdate.");
+    }
+    }

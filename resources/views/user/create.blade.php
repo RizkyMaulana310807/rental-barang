@@ -7,13 +7,23 @@
             <a href="/Dashboard/user"
                 class="text-indigo-600 bg-white w-12 h-12 flex justify-center items-center rounded-lg border-2 border-transparent hover:border-white hover:text-white hover:bg-indigo-500 transition duration-300 group">
                 <i class="fas fa-home fa-xl group-hover:fa-beat-fade text-current"></i>
-        </a>
+            </a>
         </div>
 
         @if (session('success'))
-            <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-6">
+            <div id="toast" class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-6">
                 {{ session('success') }}
             </div>
+
+            <script>
+                setTimeout(() => {
+                    const toast = document.getElementById('toast')
+                    if (toast) {
+                        toast.style.opacity = '0';
+                        setTimeout(() => toast.remove(), 500); // Hapus dari DOM setelah transisi
+                    }
+                }, 2000);
+            </script>
         @endif
 
         <div class="bg-white p-6 rounded-xl shadow-md">
@@ -26,7 +36,11 @@
                             <input type="text" id="name" name="name" required
                                 class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition" />
                         </div>
-
+                        <div>
+                            <label for="username" class="block text-gray-700 mb-2">Username</label>
+                            <input type="text" id="username" name="username" required
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition" />
+                        </div>
                         <div>
                             <label for="email" class="block text-gray-700 mb-2">Email</label>
                             <input type="email" id="email" name="email" required
@@ -34,9 +48,15 @@
                         </div>
 
                         <div>
-                            <label for="class" class="block text-gray-700 mb-2">Kelas</label>
-                            <input type="text" id="class" name="class" required
-                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition" />
+                            <label for="class_id" class="block text-gray-700 mb-2">Kelas</label>
+                            <select name="class_id" id="class_id"
+                                class="w-full mt-1 px-4 py-2 border rounded-lg focus:ring-2 focus:ring-purple-500 focus:outline-none">
+                                <option value="none" disabled selected>Pilih Kelas</option>
+                                @foreach ($kelas as $item)
+                                    <option value="{{ $item->id }}">{{ $item->nama_kelas }}</option>
+                                @endforeach
+                                <!-- Tambahkan opsi kelas lainnya sesuai kebutuhan -->
+                            </select>
                         </div>
 
                         <div>
