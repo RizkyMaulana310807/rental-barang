@@ -41,8 +41,9 @@ class DashboardController extends Controller
 
     public function showTransaksi()
     {
+        $transaksis = \App\Models\Peminjaman::all();
         if (Auth::check() && trim(Auth::user()->role) == 'admin') {
-            return view('admin.transaksi');
+            return view('admin.transaksi', compact('transaksis'));
         }
     }
 }

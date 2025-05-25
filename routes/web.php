@@ -35,6 +35,7 @@ Route::get('/pinjam/form', function(){
 Route::post('/peminjaman/store', [PeminjamanController::class, 'store'])->name('peminjaman.store');
 Route::get('/pinjam/{barang}', [PeminjamanController::class, 'create'])->name('peminjaman.create');
 Route::post('/pinjam', [PeminjamanController::class, 'store'])->name('peminjaman.store');
+Route::post('/pinjam/{id}/edit', [PeminjamanController::class, 'edit'])->name('peminjaman.edit');
 
 
 Route::get('/gambar/upload', [GambarController::class, 'uploadForm'])->name('gambar.uploadForm');

@@ -46,4 +46,8 @@ class PeminjamanController extends Controller
     {
         return view('formTransaksi', ['barang' => $barang]);
     }
+
+    public function edit($id){
+        
+    }
 }
