@@ -12,7 +12,6 @@ use App\Http\Controllers\PeminjamanController;
 
 Route::get('/', function () {
     $stocks = Barang::all();
-
     return view('home', compact('stocks'));
 })->name('home');
 
@@ -29,14 +28,15 @@ Route::get('/error/404', function(){
 })->name('404');
 
 Route::get('/pinjam/form', function(){
-    return view('formTransaksi');
+    $barang = Barang::all();
+    return view('formTransaksi', compact('barang'));
 })->name('formTransaksi');
 
+Route::get('/peminjaman/create', [PeminjamanController::class, 'index'])->name('peminjaman.index');
 Route::post('/peminjaman/store', [PeminjamanController::class, 'store'])->name('peminjaman.store');
 Route::get('/pinjam/{barang}', [PeminjamanController::class, 'create'])->name('peminjaman.create');
 Route::post('/pinjam', [PeminjamanController::class, 'store'])->name('peminjaman.store');
 Route::post('/pinjam/{id}/edit', [PeminjamanController::class, 'edit'])->name('peminjaman.edit');
-
 
 Route::get('/gambar/upload', [GambarController::class, 'uploadForm'])->name('gambar.uploadForm');
 Route::post('/gambar/upload', [GambarController::class, 'store'])->name('gambar.store');

@@ -5,9 +5,17 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Barang;
 use App\Models\Peminjaman;
+use App\Models\User;
 
 class PeminjamanController extends Controller
 {
+
+    public function index(){
+        $barangs = Barang::all();
+        $user = User::all();
+        return view('transaksi.create', compact('barangs', 'user'));
+    }
+    
     public function store(Request $request)
     {
         // Validasi input

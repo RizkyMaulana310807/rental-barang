@@ -39,7 +39,7 @@
             Transaksi
         </x-slot:header>
         <x-slot:link>
-            /pinjam
+            /peminjaman/create
         </x-slot:link>
     </x-header>
 
