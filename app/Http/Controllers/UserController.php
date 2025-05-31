@@ -49,7 +49,7 @@ class UserController extends Controller
                 'password' => 'required'
             ]);
 
-            \App\Models\User::create([
+            User::create([
                 'name' => $request->name,
                 'username' => $request->username,
                 'email' => $request->email,
@@ -82,36 +82,26 @@ class UserController extends Controller
         $user = User::findOrFail($id);
 
         $request->validate([
-            'email' => 'nullable|email|unique:users,email,' . $id,
-            'username' => 'nullable|unique:users,username,' . $id,
-            'name' => 'nullable|string|max:255',
-            'class_id' => 'nullable|exists:kelas,id',
-            'role' => 'nullable|in:user,admin',
-            'isGuru' => 'nullable|in:0,1',
+            'email' => 'required|email|unique:users,email,' . $id,
+            'username' => 'required|unique:users,username,' . $id,
+            'name' => 'required|string|max:255',
+            'class_id' => 'required|exists:kelas,id',
+            'role' => 'required|in:user,admin',
+            'isGuru' => 'required|in:0,1',
             'password' => 'nullable|string',
         ]);
 
-        $data = array_filter($request->only([
-            'name',
-            'username',
-            'email',
-            'class_id',
-            'role',
-            'isGuru'
-        ]));
+        // Update data user
+        $user->name = $request->name;
+        $user->username = $request->username;
+        $user->email = $request->email;
+        $user->class_id = $request->class_id;
+        $user->role = $request->role;
+        $user->isGuru = $request->isGuru;
 
         if ($request->filled('password')) {
-            $data['password'] = bcrypt($request->password);
+            $user->password = bcrypt($request->password);
         }
-
-        // Isi $data kosong berarti tidak ada input baru
-        if (empty($data)) {
-            return redirect()->route('user.edit', $id)
-                ->withErrors(['error' => 'Tidak ada data yang diubah']);
-        }
-
-        // Fill model dengan data baru
-        $user->fill($data);
 
         // Cek apakah ada perubahan
         if (!$user->isDirty()) {
@@ -119,9 +109,9 @@ class UserController extends Controller
                 ->withErrors(['error' => 'Tidak ada data yang diubah']);
         }
 
-        // Save data jika ada perubahan
         $user->save();
 
-        return redirect()->route('user.edit', $id)->with('success', 'User updated successfully');
+        return redirect()->route('user.edit', $id)
+            ->with('success', 'User updated successfully');
     }
 }

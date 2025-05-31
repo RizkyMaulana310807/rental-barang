@@ -3,6 +3,8 @@
 @endphp
 
 <x-layout>
+    {{-- @dd($barang) --}}
+
     <x-slot:title>Form Peminjaman Barang</x-slot:title>
 
     <div class="container mx-auto px-4 py-8">

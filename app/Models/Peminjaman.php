@@ -16,5 +16,14 @@ class Peminjaman extends Model
         'jam_selesai',
         'status',
     ];
-    
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'id_user');
+    }
+
+    public function barang()
+    {
+        return $this->belongsTo(Barang::class, 'id_barang');
+    }
 }

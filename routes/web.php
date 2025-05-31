@@ -1,7 +1,10 @@
 <?php
 
-use App\Models\Barang;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+
+use App\Models\Barang;
+use App\Models\Peminjaman;
 use App\Http\Controllers\GambarController;
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\AuthController;
@@ -9,6 +12,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\PeminjamanController;
+
 
 Route::get('/', function () {
     $stocks = Barang::all();
@@ -32,11 +36,31 @@ Route::get('/pinjam/form', function(){
     return view('formTransaksi', compact('barang'));
 })->name('formTransaksi');
 
+
+Route::get('/profile', function(){
+    return view('profile');
+})->name('profile');
+
+
+
+Route::get('/dipinjam', function () {
+    $transactions = Peminjaman::with('barang')
+        ->where('id_user', Auth::id())
+        ->get();
+
+    return view('dipinjam', compact('transactions'));
+})->name('dipinjam');
+
+Route::put('/peminjaman/{id}/return', [PeminjamanController::class, 'kembalikan'])->name('peminjaman.return');
+
+
+Route::get('/peminjaman/create/{barang}', [PeminjamanController::class, 'create'])->name('peminjaman.create');
 Route::get('/peminjaman/create', [PeminjamanController::class, 'index'])->name('peminjaman.index');
 Route::post('/peminjaman/store', [PeminjamanController::class, 'store'])->name('peminjaman.store');
-Route::get('/pinjam/{barang}', [PeminjamanController::class, 'create'])->name('peminjaman.create');
-Route::post('/pinjam', [PeminjamanController::class, 'store'])->name('peminjaman.store');
-Route::post('/pinjam/{id}/edit', [PeminjamanController::class, 'edit'])->name('peminjaman.edit');
+Route::delete('/pinjam/{barang}', [PeminjamanController::class, 'destroy'])->name('peminjaman.destroy');
+Route::get('/pinjam/{id}/edit', [PeminjamanController::class, 'edit'])->name('peminjaman.edit');
+Route::put('/peminjaman/{id}/update', [PeminjamanController::class, 'update'])->name('peminjaman.update');
+
 
 Route::get('/gambar/upload', [GambarController::class, 'uploadForm'])->name('gambar.uploadForm');
 Route::post('/gambar/upload', [GambarController::class, 'store'])->name('gambar.store');

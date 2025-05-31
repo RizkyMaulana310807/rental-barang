@@ -31,7 +31,7 @@
                             class="hidden absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-2 z-20">
 
                             <a class="text-sm block w-full px-4 py-2 text-blue-700 hover:bg-blue-100"
-                                href="/Profile">Profile</a>
+                                href="/profile">Profile</a>
 
                             @if (trim(auth()->user()->role) == 'admin')
                                 @if (Route::is(['dashboard', 'user', 'barang', 'transaksi']))
@@ -85,7 +85,7 @@
     <div class="sm:hidden hidden" id="mobile-menu">
         <div class="pt-2 pb-3 space-y-1">
             @if (Auth::check())
-                <a href="/Profile"
+                <a href="/profile"
                     class="block w-full px-3 py-2 text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">
                     Profile
                 </a>

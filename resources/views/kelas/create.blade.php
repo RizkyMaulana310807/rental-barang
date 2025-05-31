@@ -47,7 +47,7 @@
                 <div class="w-full md:w-1/2 bg-indigo-50 rounded-xl p-6 flex flex-col items-center justify-center">
                     <div class="text-center">
                         <i class="fas fa-users fa-4x fa-bounce text-indigo-600 mx-auto"></i>
-                        <h3 class="text-lg font-medium text-indigo-800 mt-4">Tambah Kelas Baru</h3>
+                        <h3 class="text-lg font-medium text-indigo-800 mt-4">Tambah kontol Baru</h3>
                         <p class="text-gray-600 mt-2">Isi formulir dengan detail Kelas yang ingin ditambahkan.</p>
                     </div>
                 </div>
