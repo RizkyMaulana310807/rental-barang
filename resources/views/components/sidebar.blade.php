@@ -62,19 +62,19 @@
         <!-- Bottom Section -->
         <div class="p-4 border-t">
             <div class="flex items-center space-x-3">
-                <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Avatar" class="w-8 h-8 rounded-full">
+                <img src="#" alt="Avatar" class="w-8 h-8 rounded-full">
                 <div x-show="open">
                     <p class="text-sm font-semibold">{{ auth()->user()->name }}</p>
                     <p class="text-xs text-gray-500"> <i class="fas fa-clipboard-user"></i> {{ auth()->user()->role }}
                     </p>
                 </div>
             </div>
-            <form action="{{ route('logout') }}" method="POST">
+            {{-- <form action="{{ route('logout') }}" method="POST">
                 @csrf
                 <button type="submit" class="block w-full text-left px-4 py-2 text-sm text-red-700 hover:bg-red-100">
                     <i class="fas fa-door-open"></i> Logout
                 </button>
-            </form>
+            </form> --}}
 
         </div>
     </div>

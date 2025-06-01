@@ -46,6 +46,19 @@
                                     </a>
                                 @endif
                             @endif
+                            @if (trim(auth()->user()->role) == 'user')
+                                @if (!Route::is('home'))
+                                    <a href="/"
+                                        class="block w-full px-4 py-2 text-sm text-blue-700 hover:text-blue-900 hover:bg-blue-50">
+                                        Home
+                                    </a>
+                                @endif
+                            @endif
+
+                            <a href="/dipinjam"
+                                class="block w-full px-4 py-2 text-sm text-blue-700 hover:text-blue-900 hover:bg-blue-50">
+                                Riwayat pinjaman
+                            </a>
 
                             <form action="{{ route('logout') }}" method="POST">
                                 @csrf
@@ -101,6 +114,12 @@
                             Dashboard Admin
                         </a>
                     @endif
+                @endif
+                @if (trim(auth()->user()->role) == 'user')
+                    <a href="/"
+                        class="block w-full px-3 py-2 text-base font-medium text-blue-700 hover:text-blue-900 hover:bg-blue-50">
+                        Home
+                    </a>
                 @endif
                 <form action="{{ route('logout') }}" method="POST">
                     @csrf

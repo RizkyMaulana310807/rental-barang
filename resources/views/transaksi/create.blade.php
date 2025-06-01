@@ -89,7 +89,7 @@
                                 required>
                                 <option value="">-- Pilih Barang --</option>
                                 @foreach ($barangs as $barang)
-                                    <option value="{{ $barang->id }}"
+                                    <option value="{{ $barang->id }}" data-stock="{{ $barang->stock }}"
                                         {{ old('barang_id') == $barang->id ? 'selected' : '' }}>
                                         {{ $barang->nama }} (Stok: {{ $barang->stock }})
                                     </option>
@@ -191,7 +191,10 @@
 
         // Cek stok barang sebelum submit
         document.getElementById('peminjamanForm').addEventListener('submit', function(e) {
-            const stok = {{ $barang->stock }};
+            const barangSelect = document.getElementById('barang_id');
+            const selectedOption = barangSelect.options[barangSelect.selectedIndex];
+            const stok = parseInt(selectedOption.getAttribute('data-stock'));
+
             if (stok <= 0) {
                 e.preventDefault();
                 alert('Maaf, stok barang ini sudah habis. Silahkan pilih barang lain.');

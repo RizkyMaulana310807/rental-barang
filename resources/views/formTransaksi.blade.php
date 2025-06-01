@@ -100,30 +100,30 @@
                         <div>
                             <label for="tanggal_pinjam" class="block text-gray-700 mb-2">Tanggal Pinjam*</label>
                             <input type="date" name="tanggal_pinjam" id="tanggal_pinjam"
-                                value="{{ old('tanggal_pinjam') }}" required min="{{ date('Y-m-d') }}"
+                                value="{{ old('tanggal_pinjam', date('Y-m-d')) }}" required min="{{ date('Y-m-d') }}"
                                 class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition">
                         </div>
 
                         <div>
                             <label for="tanggal_kembali" class="block text-gray-700 mb-2">Tanggal Kembali*</label>
                             <input type="date" name="tanggal_kembali" id="tanggal_kembali"
-                                value="{{ old('tanggal_kembali') }}" required min="{{ date('Y-m-d') }}"
+                                value="{{ old('tanggal_kembali', date('Y-m-d')) }}" required min="{{ date('Y-m-d') }}"
                                 class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition">
                         </div>
 
                         <div class="grid grid-cols-2 gap-4">
                             <div>
                                 <label for="jam_mulai" class="block text-gray-700 mb-2">Jam Mulai*</label>
-                                <input type="time" name="jam_mulai" id="jam_mulai"
-                                    value="{{ old('jam_mulai', now()->format('H:i')) }}" required
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg ...">
+                                <input type="time" name="jam_mulai" id="jam_mulai" value="{{ old('jam_mulai') }}"
+                                    required
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition">
                             </div>
 
                             <div>
                                 <label for="jam_selesai" class="block text-gray-700 mb-2">Jam Selesai*</label>
                                 <input type="time" name="jam_selesai" id="jam_selesai"
-                                    value="{{ old('jam_selesai', now()->addHours(2)->format('H:i')) }}" required
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg ...">
+                                    value="{{ old('jam_selesai') }}" required
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition">
                             </div>
                         </div>
                     </div>
@@ -156,7 +156,9 @@
             const jamSelesaiInput = document.getElementById('jam_selesai');
 
             if (tanggalPinjam && !tanggalPinjam.value) tanggalPinjam.value = today;
+            tanggalPinjam.setAttribute('min', today);
             if (tanggalKembali && !tanggalKembali.value) tanggalKembali.value = today;
+            tanggalKembali.setAttribute('min', tanggalPinjam.value);
             if (jamMulaiInput && !jamMulaiInput.value) jamMulaiInput.value = jamMulai;
             if (jamSelesaiInput && !jamSelesaiInput.value) jamSelesaiInput.value = jamSelesai;
 
@@ -167,10 +169,14 @@
         // Validasi tanggal kembali tidak boleh sebelum tanggal pinjam
         document.getElementById('tanggal_pinjam').addEventListener('change', function() {
             const tanggalKembali = document.getElementById('tanggal_kembali');
-            tanggalKembali.min = this.value;
+            const tanggalPinjam = this.value;
 
-            if (tanggalKembali.value && tanggalKembali.value < this.value) {
-                tanggalKembali.value = this.value;
+            // Update nilai minimum tanggal kembali
+            tanggalKembali.min = tanggalPinjam;
+
+            // Jika tanggal kembali lebih awal dari tanggal pinjam, set ulang
+            if (tanggalKembali.value < tanggalPinjam) {
+                tanggalKembali.value = tanggalPinjam;
             }
         });
 

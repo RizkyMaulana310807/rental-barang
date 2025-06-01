@@ -542,8 +542,8 @@
                 pageType: 'transaksi',
                 searchableColumns: ['user', 'barang', 'status'],
                 filterOptions: [{
-                        value: 'status:selesai',
-                        label: 'Status: Selesai'
+                        value: 'status:dikembalikan',
+                        label: 'Status: Dikembalikan'
                     },
                     {
                         value: 'status:dipinjam',

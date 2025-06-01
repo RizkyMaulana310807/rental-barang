@@ -49,9 +49,8 @@
                 style="background-image: url('images/Hotel Saudade.jpeg');">
                 <div class="text-white">
                     <img src="images/logosmkrembg.png" alt="Logo" class="w-12 mb-6">
-                    <p class="text-xl font-semibold mb-3">"Simply all the tools that my team and I need."</p>
-                    <p class="text-sm">Karen Yue<br><span class="text-xs">Director of Digital Marketing
-                            Technology</span>
+                    <p class="text-xl font-semibold mb-3">"Barang elektronik yang anda butuhkan"</p>
+                    <p class="text-sm">Karen Yue<br><span class="text-xs">CodeX Technology</span>
                     </p>
                 </div>
             </div>

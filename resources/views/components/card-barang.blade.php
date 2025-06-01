@@ -69,7 +69,7 @@
 
                 <div>
                     <a href="{{ route('peminjaman.create', ['barang' => $id]) }}"
-                        class="w-full block text-center bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition-colors {{ $stock <= 0 ? 'pointer-events-none opacity-50' : '' }}">
+                        class="w-full block text-center bg-indigo-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition-colors {{ $stock <= 0 ? 'pointer-events-none opacity-50' : '' }}">
                         Pinjam
                     </a>
                 </div>

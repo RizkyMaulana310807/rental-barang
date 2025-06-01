@@ -4,7 +4,7 @@
     <div class="container mx-auto px-4 py-8">
         <div class="max-w-3xl mx-auto bg-white rounded-lg shadow-md overflow-hidden">
             <!-- Header Profil -->
-            <div class="bg-blue-600 py-4 px-6">
+            <div class="bg-indigo-600 py-4 px-6">
                 <h1 class="text-2xl font-bold text-white">Profil Pengguna</h1>
             </div>
 
@@ -41,8 +41,8 @@
                                 <p>{{ auth()->user()->isGuru ? 'Guru' : 'Siswa' }}</p>
                             </div>
                             <div>
-                                <h3 class="font-medium text-gray-700">Bergabung Pada</h3>
-                                <p>{{ auth()->user()->created_at->format('d F Y') }}</p>
+                                <h3 class="font-medium text-gray-700">Kelas</h3>
+                                <p>{{ auth()->user()->kelas->nama_kelas ?? "Tidak dalam kelas" }}</p>
                             </div>
                         </div>
                     </div>

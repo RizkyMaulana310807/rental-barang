@@ -28,7 +28,7 @@ class PeminjamanController extends Controller
             'tanggal_pinjam' => 'required|date|after_or_equal:today',
             'tanggal_kembali' => 'required|date|after_or_equal:tanggal_pinjam',
             'jam_mulai' => 'required|date_format:H:i',
-            'jam_selesai' => 'required|date_format:H:i|after_or_equal:jam_mulai',
+            'jam_selesai' => 'required|date_format:H:i', // ← tidak ada lagi after_or_equal:jam_mulai
         ]);
 
         // Cek stok barang
@@ -59,6 +59,9 @@ class PeminjamanController extends Controller
 
     public function create(Barang $barang)
     {
+        if(!Auth::user()){
+            return redirect()->route('login')->with('error', 'Anda harus login terlebih dahulu');
+        }
         return view('formTransaksi', ['barang' => $barang]);
     }
 
@@ -69,6 +72,9 @@ class PeminjamanController extends Controller
         if (Auth::check() && trim(Auth::user()->role) == 'admin') {
 
             $transaksi = Peminjaman::findOrFail($id);
+            $barang = Barang::findOrFail($transaksi->id_barang);
+            $barang->increment('stock');
+
             $transaksi->delete();
 
             return redirect()->route('transaksi')->with('success', 'Barang dan gambar berhasil dihapus.');
@@ -101,7 +107,8 @@ class PeminjamanController extends Controller
             'tanggal_pinjam' => 'required|date|after_or_equal:today',
             'tanggal_kembali' => 'required|date|after_or_equal:tanggal_pinjam',
             'jam_mulai' => 'required|date_format:H:i',
-            'jam_selesai' => 'required|date_format:H:i|after_or_equal:jam_mulai',
+            'jam_selesai' => 'required|date_format:H:i',
+            'status' => 'nullable'
         ]);
 
         $peminjaman = Peminjaman::findOrFail($id);
@@ -113,6 +120,17 @@ class PeminjamanController extends Controller
             'jam_mulai' => $request->jam_mulai,
             'jam_selesai' => $request->jam_selesai,
         ]);
+
+        if ($request->status != '' || $request->status != null) {
+            $peminjaman->status = 'dikembalikan'; // Ganti dengan nama kolom dan nilai status yang sesuai
+            $peminjaman->jam_dikembalikan = Carbon::now()->format('H:i:s'); // Ganti dengan nama kolom dan nilai status yang sesuai
+            if ($peminjaman->status != 'dikembalikan') {
+                $barang = Barang::findOrFail($peminjaman->id_barang);
+                $barang->increment('stock');
+            };
+            $peminjaman->save();
+        };
+
 
         return redirect()->route(Auth::user()->role === 'admin' ? 'transaksi' : 'home')
             ->with('success', 'Peminjaman berhasil diperbarui!');
@@ -130,18 +148,19 @@ class PeminjamanController extends Controller
             }
 
             // Gunakan waktu saat ini untuk pengembalian
-            $waktu_kembali = now();
+            $waktu_kembali = Carbon::now();
             $deadline = Carbon::parse($transaction->tanggal_kembali . ' ' . $transaction->jam_selesai);
 
             // Bandingkan waktu kembali vs deadline
-            $status = $waktu_kembali->greaterThan($deadline) ? 'terlambat' : 'dikembalikan';
-
+            $status = 'dikembalikan';
             // Update data transaksi
             $transaction->update([
                 'jam_dikembalikan' => $waktu_kembali->format('H:i:s'),
                 'status' => $status,
-                'updated_at' => $waktu_kembali
             ]);
+
+            $barang = Barang::findOrFail($transaction->id_barang);
+            $barang->increment('stock');
 
             return redirect()->back()->with('success', 'Barang berhasil dikembalikan pada ' . $waktu_kembali->format('H:i'));
         } catch (\Exception $e) {

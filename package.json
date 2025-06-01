@@ -3,7 +3,8 @@
     "type": "module",
     "scripts": {
         "build": "vite build",
-        "dev": "vite"
+        "dev": "vite",
+        "laravel": "php artisan serve & npm run dev"
     },
     "devDependencies": {
         "@tailwindcss/vite": "^4.0.0",
