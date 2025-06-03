@@ -59,7 +59,7 @@ class PeminjamanController extends Controller
 
     public function create(Barang $barang)
     {
-        if(!Auth::user()){
+        if (!Auth::user()) {
             return redirect()->route('login')->with('error', 'Anda harus login terlebih dahulu');
         }
         return view('formTransaksi', ['barang' => $barang]);
@@ -72,8 +72,10 @@ class PeminjamanController extends Controller
         if (Auth::check() && trim(Auth::user()->role) == 'admin') {
 
             $transaksi = Peminjaman::findOrFail($id);
-            $barang = Barang::findOrFail($transaksi->id_barang);
-            $barang->increment('stock');
+            if (!$transaksi->status == 'dikembalikan') {
+                $barang = Barang::findOrFail($transaksi->id_barang);
+                $barang->increment('stock');
+            }
 
             $transaksi->delete();
 
