@@ -41,6 +41,9 @@
         <x-slot:header>
             User
         </x-slot:header>
+        <x-slot:download>
+            /export-users
+        </x-slot:download>
         <x-slot:link>
             /user/create
         </x-slot:link>

@@ -38,6 +38,10 @@
         <x-slot:header>
             Transaksi
         </x-slot:header>
+        <x-slot:download>
+            /export-transaksi
+        </x-slot:download>
+
         <x-slot:link>
             /peminjaman/create
         </x-slot:link>

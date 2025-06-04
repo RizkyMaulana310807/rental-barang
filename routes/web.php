@@ -16,6 +16,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\PeminjamanController;
+use App\Http\Controllers\ExportController;
 
 
 Route::get('/', function () {
@@ -121,3 +122,10 @@ Route::get('/Dashboard/user', [DashboardController::class, 'showUser'])->name('u
 Route::get('/Dashboard/transaksi', [DashboardController::class, 'showTransaksi'])->name('transaksi');
 Route::get('/Dashboard/kelas', [DashboardController::class, 'showKelas'])->name('kelas');
 // Route::get('/Dashboard/user/{id}/edit', [DashboardController::class, 'editUser'])->name('editUser');
+
+
+// --===-- Export Data --===--
+Route::get('/export-users', [ExportController::class, 'ExportUser']);
+Route::get('/export-barang', [ExportController::class, 'ExportBarang']);
+Route::get('/export-kelas', [ExportController::class, 'ExportKelas']);
+Route::get('/export-transaksi', [ExportController::class, 'ExportTransaksi']);

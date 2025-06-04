@@ -5,6 +5,9 @@
         <x-slot:header>
             Barang
         </x-slot:header>
+        <x-slot:download>
+            /export-barang
+        </x-slot:download>
         <x-slot:link>
             /barang/create
         </x-slot:link>
@@ -226,7 +229,7 @@
                             row.setAttribute('data-nama', cells[2].textContent.trim().toLowerCase());
                             row.setAttribute('data-deskripsi', cells[3].textContent.trim().toLowerCase());
                             row.setAttribute('data-stock', parseInt(cells[4].textContent.trim()) || 0);
-                            
+
                             // Kategori stock untuk filter
                             const stock = parseInt(cells[4].textContent.trim()) || 0;
                             if (stock === 0) {
@@ -393,7 +396,7 @@
                         if (firstCell) {
                             firstCell.textContent = index + 1;
                         }
-                        
+
                         // Update row styling for alternating colors
                         row.className = row.className.replace(/bg-(white|gray-50)/g, '');
                         if (index % 2 === 0) {
@@ -483,18 +486,43 @@
                     totalCountId: 'totalCount',
                     pageType: 'barang',
                     searchableColumns: ['nama', 'deskripsi'],
-                    filterOptions: [
-                        { value: 'stock-status:habis', label: 'Stok Habis' },
-                        { value: 'stock-status:sedikit', label: 'Stok Sedikit (≤10)' },
-                        { value: 'stock-status:tersedia', label: 'Stok Tersedia (>10)' }
+                    filterOptions: [{
+                            value: 'stock-status:habis',
+                            label: 'Stok Habis'
+                        },
+                        {
+                            value: 'stock-status:sedikit',
+                            label: 'Stok Sedikit (≤10)'
+                        },
+                        {
+                            value: 'stock-status:tersedia',
+                            label: 'Stok Tersedia (>10)'
+                        }
                     ],
-                    sortOptions: [
-                        { value: 'nama:asc', label: 'Nama (A-Z)' },
-                        { value: 'nama:desc', label: 'Nama (Z-A)' },
-                        { value: 'stock:asc', label: 'Stok Terendah' },
-                        { value: 'stock:desc', label: 'Stok Tertinggi' },
-                        { value: 'id:asc', label: 'ID Terkecil' },
-                        { value: 'id:desc', label: 'ID Terbesar' }
+                    sortOptions: [{
+                            value: 'nama:asc',
+                            label: 'Nama (A-Z)'
+                        },
+                        {
+                            value: 'nama:desc',
+                            label: 'Nama (Z-A)'
+                        },
+                        {
+                            value: 'stock:asc',
+                            label: 'Stok Terendah'
+                        },
+                        {
+                            value: 'stock:desc',
+                            label: 'Stok Tertinggi'
+                        },
+                        {
+                            value: 'id:asc',
+                            label: 'ID Terkecil'
+                        },
+                        {
+                            value: 'id:desc',
+                            label: 'ID Terbesar'
+                        }
                     ]
                 });
 

@@ -41,6 +41,9 @@
         <x-slot:header>
             Kelas
         </x-slot:header>
+        <x-slot:download>
+            /export-kelas
+        </x-slot:download>
         <x-slot:link>
             /kelas/create
         </x-slot:link>
